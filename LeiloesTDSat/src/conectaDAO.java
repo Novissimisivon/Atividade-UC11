@@ -15,19 +15,20 @@ import javax.swing.JOptionPane;
  *
  *the @author Adm
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 public class conectaDAO {
-    
-    public Connection connectDB(){
+    public Connection connectDB() {
         Connection conn = null;
-        
         try {
-        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/uc11?user=root&password=19378246");
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+            String url = "jdbc:mysql://localhost/uc11?user=root&password=19378246&useSSL=false&serverTimezone=UTC";
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco: " + erro.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return conn;
     }
-    
 }
